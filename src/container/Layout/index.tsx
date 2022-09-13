@@ -1,5 +1,6 @@
 import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
+import { Post } from "../../components/Post";
 
 import styles from "./styles.module.css";
 
@@ -9,7 +10,10 @@ export function Layout() {
       <Header />
       <div className={styles.container}>
         <Sidebar />
-        <div>feed</div>
+        <section>
+          <Post />
+          <Post />
+        </section>
       </div>
     </main>
   );
