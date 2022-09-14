@@ -1,0 +1,93 @@
+.comment {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.comment > img {
+  width: 3rem;
+  height: 3rem;
+}
+
+.comment-box {
+  flex: 1;
+}
+
+.comment-box footer {
+  margin-top: 1rem;
+}
+
+.comment-box footer button {
+  background: transparent;
+  border: 0;
+  color: var(--gray-400);
+  line-height: 0;
+  border-radius: 2px;
+
+  display: flex;
+  align-items: center;
+
+  transition: color 0.15s ease-in-out;
+}
+
+.comment-box footer button:hover {
+  color: var(--green-300);
+}
+
+.comment-box footer button svg {
+  margin-right: 0.5rem;
+}
+
+.comment-box footer button span::before {
+  content: "\2022";
+  padding: 0 0.5rem;
+}
+
+.comment-content {
+  background: var(--gray-700);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.comment-content header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.comment-content header button {
+  background: transparent;
+  border: 0;
+  color: var(--gray-400);
+  line-height: 0;
+  border-radius: 2px;
+  transition: color 0.15s ease-in-out;
+}
+
+.comment-content header button:hover {
+  color: var(--red-500);
+}
+
+.comment-content > p {
+  margin-top: 1rem;
+  color: var(--gray-300);
+}
+
+.author-and-time {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-and-time strong,
+.author-and-time time {
+  line-height: 1.6;
+}
+
+.author-and-time strong {
+  font-size: 0.875rem;
+}
+
+.author-and-time time {
+  font-size: 0.75rem;
+  color: var(--gray-400);
+}
