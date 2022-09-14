@@ -70,3 +70,53 @@
 .content a[href="#"]:hover {
   color: var(--green-300);
 }
+
+.comment-form {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--gray-600);
+}
+
+.comment-form > strong {
+  line-height: 1.6;
+  color: var(--green-100);
+}
+
+.comment-form textarea {
+  width: 100%;
+  background: var(--gray-900);
+  border: 0;
+  resize: none;
+  height: 6rem;
+  padding: 1rem;
+  border-radius: 8px;
+  color: var(--gray-100);
+  line-height: 1.4;
+  margin-top: 1rem;
+}
+
+.comment-form > footer {
+  visibility: hidden;
+  max-height: 0;
+}
+
+.comment-form:focus-within footer {
+  visibility: visible;
+  max-height: none;
+}
+
+.comment-form button[type="submit"] {
+  padding: 1rem 1.5rem;
+  margin-top: 1rem;
+  border-radius: 8px;
+  border: 0;
+  background: var(--green-500);
+  color: var(--white);
+  font-weight: bold;
+  transition: background 0.15s ease-in-out;
+}
+
+.comment-form button[type="submit"]:hover {
+  background: var(--green-300);
+}
