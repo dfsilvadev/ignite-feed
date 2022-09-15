@@ -1,3 +1,7 @@
+import { Layout } from "./container/Layout";
+
+import "./styles/global.css";
+
 export default function App() {
-  return <div>app</div>;
+  return <Layout />;
 }
