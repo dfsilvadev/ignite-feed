@@ -1,0 +1,9 @@
+.tag {
+  display: inline-block;
+  font-weight: bold;
+  color: var(--green-500);
+}
+
+.tag + .tag {
+  margin-left: 0.5rem;
+}
