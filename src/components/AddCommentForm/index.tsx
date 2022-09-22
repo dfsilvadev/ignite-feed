@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 
-export function PostFormComment() {
+export function AddCommentForm() {
   return (
     <form className={styles["comment-form"]}>
       <strong>Deixe o seu feedback</strong>
