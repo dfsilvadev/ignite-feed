@@ -1,9 +1,9 @@
 export default [
   {
-    id: 1,
+    id: 10,
     author: {
-      avatarUrl: "http://",
-      name: "Jhon Doe",
+      avatarUrl: "https://i.pravatar.cc/150?img=58",
+      name: "John Doe",
       role: "Front-end Developer",
     },
     content: [
@@ -27,10 +27,10 @@ export default [
     publishedAt: new Date("2022-09-03 20:45:16"),
   },
   {
-    id: 2,
+    id: 20,
     author: {
-      avatarUrl: "http://",
-      name: "Jhoanna Doe",
+      avatarUrl: "https://i.pravatar.cc/150?img=21",
+      name: "Johanna Doe",
       role: "UI/UX Design",
     },
     content: [
