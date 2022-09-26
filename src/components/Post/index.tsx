@@ -1,56 +1,78 @@
+import { useState } from "react";
+
 import { Avatar } from "../Avatar";
 import { Comment } from "../Comment";
+import { Tags } from "../Tags";
+import { AddCommentForm } from "../AddCommentForm";
 
 import styles from "./styles.module.css";
 
-export function Post() {
+import { PostProps } from "./types";
+
+import useFormatDateTime from "../../hooks/useFormatDateTime";
+
+export function Post({
+  author,
+  content,
+  hashtags,
+  publishedAt,
+  postId,
+}: PostProps) {
+  const [comments, setComments] = useState(["Muito bom John, parabéns!! 👏👏"]);
+
+  const [publishedDateFormatted, publishedDateRelativeNow] =
+    useFormatDateTime();
+
+  function handleCreateNewComment(newComment: string) {
+    setComments([...comments, newComment]);
+  }
+
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <Avatar url="https://avatars.githubusercontent.com/u/16245261?v=4" />
+          <Avatar url={author.avatarUrl} />
 
           <div className={styles["author-info"]}>
-            <strong>Daniel Silva</strong>
-            <span>Front-end Developer</span>
+            <strong>{author?.name}</strong>
+            <span>{author?.role}</span>
           </div>
         </div>
 
-        <time title="13 de Setembro às 17:04" dateTime="2022-09-13 17:04:00">
-          Publicado há 1h
+        <time
+          title={publishedDateFormatted(publishedAt)}
+          dateTime={publishedAt.toISOString()}
+        >
+          {publishedDateRelativeNow(publishedAt)}
         </time>
       </header>
 
       <div className={styles.content}>
-        <p>Fala galeraa 👋</p>
-        <p>Acabei de subir mais um projeto no meu portifa. É um</p>
-        <p>
-          projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto
-          é DoctorCare 🚀
-        </p>
-        <p>
-          <a href="#">👉 jane.design/doctorcare</a>
-        </p>
-        <p>
-          <a href="">#novoprojeto </a>
-
-          <a href="">#nlw </a>
-
-          <a href="">#rocketseat</a>
-        </p>
+        {content.map((item) => {
+          if (item.type === "paragraph") {
+            return <p key={item.content}>{item.content}</p>;
+          } else if (item.type === "link") {
+            return (
+              <a href={item.url} key={item.content}>
+                <p>{item.content}</p>
+              </a>
+            );
+          }
+        })}
+        <div>
+          <Tags tags={hashtags} />
+        </div>
       </div>
 
-      <form className={styles["comment-form"]}>
-        <strong>Deixe o seu feedback</strong>
-        <textarea placeholder="Deixe o seu feedback" />
-
-        <footer>
-          <button type="submit">Publicar</button>
-        </footer>
-      </form>
+      <AddCommentForm
+        author={author}
+        handleCreateNewComment={handleCreateNewComment}
+      />
 
       <div className={styles["comment-list"]}>
-        <Comment />
+        {comments.map((comment) => (
+          <Comment content={comment} />
+        ))}
       </div>
     </article>
   );
