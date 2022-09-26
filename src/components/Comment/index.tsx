@@ -1,14 +1,22 @@
 import { ThumbsUp, Trash } from "phosphor-react";
+
 import { Avatar } from "../Avatar";
 
 import styles from "./styles.module.css";
 
-export function Comment() {
+import { CommentProps } from "./types";
+
+import useFormatDateTime from "../../hooks/useFormatDateTime";
+
+export function Comment({ content }: CommentProps) {
+  const [publishedDateFormatted, publishedDateRelativeNow] =
+    useFormatDateTime();
+
   return (
     <div className={styles.comment}>
       <Avatar
         hasBorder={false}
-        url="https://avatars.githubusercontent.com/u/16245261?v=4"
+        url="https://avatars.githubusercontent.com/u/16245261?s=96&v=4"
       />
 
       <div className={styles["comment-box"]}>
@@ -17,10 +25,10 @@ export function Comment() {
             <div className={styles["author-and-time"]}>
               <strong>Daniel Silva</strong>
               <time
-                title="13 de Setembro às 17:04"
+                title="13 de Setembro de 2022"
                 dateTime="2022-09-13 17:04:00"
               >
-                Cerca de 1h atrás
+                Há 15 dias
               </time>
             </div>
 
@@ -29,7 +37,7 @@ export function Comment() {
             </button>
           </header>
 
-          <p>Muito bom, Daniel. Parabéns!! 👏👏</p>
+          <p>{content}</p>
         </div>
 
         <footer>
