@@ -5,5 +5,14 @@ type TagsProps = {
 };
 
 export function Tags({ tags }: TagsProps) {
-  return <>{tags && tags.map((tag) => <p className={styles.tag}>{tag}</p>)}</>;
+  return (
+    <>
+      {tags &&
+        tags.map((tag, i) => (
+          <p className={styles.tag} key={i}>
+            {tag}
+          </p>
+        ))}
+    </>
+  );
 }
