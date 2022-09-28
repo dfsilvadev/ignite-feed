@@ -1,3 +1,5 @@
+import { Comment } from "../components/Post/types";
+
 export default [
   {
     id: 100,
@@ -28,11 +30,11 @@ export default [
     postId: 20,
     content: {
       author: {
-        avatarUrl: "https://i.pravatar.cc/150?img=9",
-        name: "Lina Lins",
+        avatarUrl: "https://i.pravatar.cc/150?img=35",
+        name: "Bia Lee",
       },
       text: "Adorei o projeto...",
     },
     publishedAt: new Date("2022-09-22 17:06:06"),
   },
-];
+] as Comment[];
