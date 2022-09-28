@@ -8,7 +8,7 @@ import { CommentProps } from "./types";
 
 export function Comment({ comment, onDeleteComment }: CommentProps) {
   function handleDeleteComment() {
-    onDeleteComment("Teste");
+    onDeleteComment(comment?.id!);
   }
 
   return (
