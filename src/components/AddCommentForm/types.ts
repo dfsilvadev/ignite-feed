@@ -1,4 +1,5 @@
 import { HTMLAttributes } from "react";
+
 import { Author } from "../Post/types";
 
 export type AddCommentFormProps = {
