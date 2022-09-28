@@ -4,6 +4,8 @@ import { Post } from "../../components/Post";
 
 import styles from "./styles.module.css";
 
+import mockPosts from "../../utils/mockPosts";
+
 export function Layout() {
   return (
     <main>
@@ -11,8 +13,17 @@ export function Layout() {
       <div className={styles.container}>
         <Sidebar />
         <section>
-          <Post />
-          <Post />
+          {mockPosts &&
+            mockPosts.map((post) => (
+              <Post
+                author={post.author}
+                content={post.content}
+                hashtags={post.hashtags}
+                publishedAt={post!.publishedAt}
+                postId={post.id}
+                key={post.id}
+              />
+            ))}
         </section>
       </div>
     </main>
