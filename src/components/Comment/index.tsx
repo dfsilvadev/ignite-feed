@@ -6,11 +6,10 @@ import styles from "./styles.module.css";
 
 import { CommentProps } from "./types";
 
-import useFormatDateTime from "../../hooks/useFormatDateTime";
-
-export function Comment({ content }: CommentProps) {
-  const [publishedDateFormatted, publishedDateRelativeNow] =
-    useFormatDateTime();
+export function Comment({ comment, onDeleteComment }: CommentProps) {
+  function handleDeleteComment() {
+    onDeleteComment("Teste");
+  }
 
   return (
     <div className={styles.comment}>
@@ -33,11 +32,11 @@ export function Comment({ content }: CommentProps) {
             </div>
 
             <button title="Deletar comentário" type="button">
-              <Trash size={24} />
+              <Trash size={24} onClick={handleDeleteComment} />
             </button>
           </header>
 
-          <p>{content}</p>
+          <p>{comment?.content.text}</p>
         </div>
 
         <footer>

@@ -1,3 +1,6 @@
+import { Comment } from "../Post/types";
+
 export type CommentProps = {
-  content?: string;
+  comment?: Comment;
+  onDeleteComment: (value: string) => void;
 };
