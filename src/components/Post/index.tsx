@@ -1,15 +1,16 @@
-import { useState } from "react";
-
 import { Avatar } from "../Avatar";
 import { Comment } from "../Comment";
 import { Tags } from "../Tags";
 import { AddCommentForm } from "../AddCommentForm";
 
+import useFormatDateTime from "../../hooks/useFormatDateTime";
+import useStoreComments from "../../hooks/useStoreComments";
+
+import mockComments from "../../utils/mockComments";
+
 import styles from "./styles.module.css";
 
 import { PostProps } from "./types";
-
-import useFormatDateTime from "../../hooks/useFormatDateTime";
 
 export function Post({
   author,
@@ -18,13 +19,35 @@ export function Post({
   publishedAt,
   postId,
 }: PostProps) {
-  const [comments, setComments] = useState(["Muito bom John, parabéns!! 👏👏"]);
+  const { comments, setValue } = useStoreComments(
+    `comments:${postId}`,
+    mockComments.filter((comment) => comment.postId === postId && comment)
+  );
 
   const [publishedDateFormatted, publishedDateRelativeNow] =
     useFormatDateTime();
 
   function handleCreateNewComment(newComment: string) {
-    setComments([...comments, newComment]);
+    setValue([
+      {
+        id: Math.floor(Math.random() * 500),
+        postId,
+        content: {
+          author: {
+            avatarUrl: "https://i.pravatar.cc/150?img=9",
+            name: "John Smith",
+          },
+          text: newComment,
+        },
+        publishedAt: new Date(),
+      },
+      ...comments,
+    ]);
+  }
+
+  function deleteComment(id: number) {
+    const newValue = comments.filter((comment) => comment.id !== id && comment);
+    setValue([...newValue]);
   }
 
   return (
@@ -70,9 +93,14 @@ export function Post({
       />
 
       <div className={styles["comment-list"]}>
-        {comments.map((comment) => (
-          <Comment content={comment} />
-        ))}
+        {comments &&
+          comments.map((comment) => (
+            <Comment
+              comment={comment}
+              key={comment.id}
+              onDeleteComment={deleteComment}
+            />
+          ))}
       </div>
     </article>
   );
