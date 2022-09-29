@@ -4,7 +4,7 @@ import { Tags } from "../Tags";
 import { AddCommentForm } from "../AddCommentForm";
 
 import useFormatDateTime from "../../hooks/useFormatDateTime";
-import useStoreComments from "../../hooks/useStoreComments";
+import useStoreData from "../../hooks/useStoreData";
 
 import mockComments from "../../utils/mockComments";
 
@@ -19,7 +19,7 @@ export function Post({
   publishedAt,
   postId,
 }: PostProps) {
-  const { data, setValue } = useStoreComments(
+  const { data, setValue } = useStoreData(
     `comments:${postId}`,
     mockComments.filter((comment) => comment.postId === postId && comment)
   );
@@ -50,6 +50,7 @@ export function Post({
       (comment: CommentType) => comment.id !== id
     );
     setValue(commentsWithoutDeletedOne);
+    localStorage.removeItem(`likeCount:${id}`);
   }
 
   return (
