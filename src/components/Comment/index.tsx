@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ThumbsUp, Trash } from "phosphor-react";
 
 import useFormatDateTime from "../../hooks/useFormatDateTime";
@@ -7,14 +6,17 @@ import { Avatar } from "../Avatar";
 
 import styles from "./styles.module.css";
 
-import { CommentProps } from "./types";
+import { CommentProps, LikeComment } from "./types";
 import useStoreData from "../../hooks/useStoreData";
 
 export function Comment({ comment, onDeleteComment }: CommentProps) {
-  const { data, setValue } = useStoreData(`likeCount:${comment?.id}`, {
-    commentId: 0,
-    numberOfLikes: 0,
-  });
+  const { data, setValue } = useStoreData<string, LikeComment>(
+    `likeCount:${comment?.id}`,
+    {
+      commentId: 0,
+      numberOfLikes: 0,
+    }
+  );
 
   const [publishedDateFormatted, publishedDateRelativeNow] =
     useFormatDateTime();

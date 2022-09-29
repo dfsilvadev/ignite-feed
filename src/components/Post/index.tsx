@@ -19,7 +19,7 @@ export function Post({
   publishedAt,
   postId,
 }: PostProps) {
-  const { data, setValue } = useStoreData(
+  const { data, setValue } = useStoreData<string, CommentType[]>(
     `comments:${postId}`,
     mockComments.filter((comment) => comment.postId === postId && comment)
   );
@@ -47,7 +47,7 @@ export function Post({
 
   function deleteComment(id: number) {
     const commentsWithoutDeletedOne = data.filter(
-      (comment: CommentType) => comment.id !== id
+      (comment) => comment.id !== id
     );
     setValue(commentsWithoutDeletedOne);
     localStorage.removeItem(`likeCount:${id}`);
@@ -97,7 +97,7 @@ export function Post({
 
       <div className={styles["comment-list"]}>
         {data &&
-          data.map((comment: CommentType) => (
+          data.map((comment) => (
             <Comment
               comment={comment}
               key={comment.id}
