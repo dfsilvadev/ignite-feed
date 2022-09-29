@@ -29,10 +29,10 @@ export function Comment({ comment, onDeleteComment }: CommentProps) {
             <div className={styles["author-and-time"]}>
               <strong>Daniel Silva</strong>
               <time
-                title="13 de Setembro de 2022"
-                dateTime="2022-09-13 17:04:00"
+                title={publishedDateFormatted(new Date(comment?.publishedAt!))}
+                dateTime={new Date(comment?.publishedAt!).toISOString()}
               >
-                Há 15 dias
+                {publishedDateRelativeNow(new Date(comment?.publishedAt!))}
               </time>
             </div>
 
