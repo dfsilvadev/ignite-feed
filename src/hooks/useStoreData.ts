@@ -5,10 +5,7 @@ type StoreCommentsProps = {
   setValue: (newComment: any) => void;
 };
 
-const useStoreComments = (
-  key: string,
-  initialValue?: any
-): StoreCommentsProps => {
+const useStoreData = (key: string, initialValue?: any): StoreCommentsProps => {
   const [data, setData] = useState(() => {
     try {
       const storedValue = localStorage.getItem(key);
@@ -29,4 +26,4 @@ const useStoreComments = (
   return { data, setValue };
 };
 
-export default useStoreComments;
+export default useStoreData;
