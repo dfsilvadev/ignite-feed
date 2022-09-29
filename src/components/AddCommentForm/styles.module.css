@@ -44,6 +44,6 @@
   transition: background 0.15s ease-in-out;
 }
 
-.comment-form button[type="submit"]:hover {
+.comment-form button[type="submit"]:not(:disabled):hover {
   background: var(--green-300);
 }

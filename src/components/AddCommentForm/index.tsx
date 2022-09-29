@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 import styles from "./styles.module.css";
 
@@ -22,6 +22,17 @@ export function AddCommentForm({
     initialValue("");
   }
 
+  function handleNewCommentChange(evt: ChangeEvent<HTMLTextAreaElement>) {
+    evt.currentTarget.setCustomValidity("");
+    setComment(evt.target.value);
+  }
+
+  function handleNewCommentInvalid(evt: FormEvent<HTMLTextAreaElement>) {
+    evt.currentTarget.setCustomValidity(
+      "Nossa... você esqueceu o comentário :("
+    );
+  }
+
   return (
     <form className={styles["comment-form"]} {...props} onSubmit={handleSubmit}>
       <strong>Deixe o seu feedback</strong>
@@ -29,11 +40,15 @@ export function AddCommentForm({
         placeholder="Deixe o seu feedback"
         name="comment"
         value={comment}
-        onChange={({ target }) => setComment(target.value)}
+        onChange={handleNewCommentChange}
+        onInvalid={handleNewCommentInvalid}
+        required
       />
 
       <footer>
-        <button type="submit">Publicar</button>
+        <button type="submit" disabled={!!!comment}>
+          Publicar
+        </button>
       </footer>
     </form>
   );
