@@ -1,5 +1,7 @@
 import { ThumbsUp, Trash } from "phosphor-react";
 
+import useFormatDateTime from "../../hooks/useFormatDateTime";
+
 import { Avatar } from "../Avatar";
 
 import styles from "./styles.module.css";
@@ -7,6 +9,9 @@ import styles from "./styles.module.css";
 import { CommentProps } from "./types";
 
 export function Comment({ comment, onDeleteComment }: CommentProps) {
+  const [publishedDateFormatted, publishedDateRelativeNow] =
+    useFormatDateTime();
+
   function handleDeleteComment() {
     onDeleteComment(comment?.id!);
   }

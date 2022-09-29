@@ -46,8 +46,10 @@ export function Post({
   }
 
   function deleteComment(id: number) {
-    const newValue = comments.filter((comment) => comment.id !== id && comment);
-    setValue([...newValue]);
+    const commentsWithoutDeletedOne = comments.filter(
+      (comment) => comment.id !== id
+    );
+    setValue(commentsWithoutDeletedOne);
   }
 
   return (
