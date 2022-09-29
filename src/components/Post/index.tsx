@@ -10,7 +10,7 @@ import mockComments from "../../utils/mockComments";
 
 import styles from "./styles.module.css";
 
-import { PostProps } from "./types";
+import { Comment as CommentType, PostProps } from "./types";
 
 export function Post({
   author,
@@ -19,7 +19,7 @@ export function Post({
   publishedAt,
   postId,
 }: PostProps) {
-  const { comments, setValue } = useStoreComments(
+  const { data, setValue } = useStoreComments(
     `comments:${postId}`,
     mockComments.filter((comment) => comment.postId === postId && comment)
   );
@@ -41,13 +41,13 @@ export function Post({
         },
         publishedAt: new Date(),
       },
-      ...comments,
+      ...data,
     ]);
   }
 
   function deleteComment(id: number) {
-    const commentsWithoutDeletedOne = comments.filter(
-      (comment) => comment.id !== id
+    const commentsWithoutDeletedOne = data.filter(
+      (comment: CommentType) => comment.id !== id
     );
     setValue(commentsWithoutDeletedOne);
   }
@@ -95,8 +95,8 @@ export function Post({
       />
 
       <div className={styles["comment-list"]}>
-        {comments &&
-          comments.map((comment) => (
+        {data &&
+          data.map((comment: CommentType) => (
             <Comment
               comment={comment}
               key={comment.id}
