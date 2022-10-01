@@ -19,7 +19,7 @@ export function Post({
   publishedAt,
   postId,
 }: PostProps) {
-  const { data, setValue } = useStoreData<string, CommentType[]>(
+  const { data, storeData } = useStoreData<string, CommentType[]>(
     `comments:${postId}`,
     mockComments.filter((comment) => comment.postId === postId && comment)
   );
@@ -28,7 +28,7 @@ export function Post({
     useFormatDateTime();
 
   function handleCreateNewComment(newComment: string) {
-    setValue([
+    storeData([
       {
         id: Math.floor(Math.random() * 500),
         postId,
@@ -49,7 +49,7 @@ export function Post({
     const commentsWithoutDeletedOne = data.filter(
       (comment) => comment.id !== id
     );
-    setValue(commentsWithoutDeletedOne);
+    storeData(commentsWithoutDeletedOne);
     localStorage.removeItem(`likeCount:${id}`);
   }
 

@@ -10,7 +10,7 @@ import { CommentProps, LikeComment } from "./types";
 import useStoreData from "../../hooks/useStoreData";
 
 export function Comment({ comment, onDeleteComment }: CommentProps) {
-  const { data, setValue } = useStoreData<string, LikeComment>(
+  const { data, storeData } = useStoreData<string, LikeComment>(
     `likeCount:${comment?.id}`,
     {
       commentId: 0,
@@ -26,7 +26,7 @@ export function Comment({ comment, onDeleteComment }: CommentProps) {
   }
 
   function handleLikeComment() {
-    setValue({
+    storeData({
       commentId: comment?.id!,
       numberOfLikes: data.numberOfLikes + 1,
     });

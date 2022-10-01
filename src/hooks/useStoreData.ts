@@ -1,14 +1,14 @@
 import { useCallback, useState } from "react";
 
-interface StoreCommentsProps<T> {
+interface StoreDataProps<T> {
   data: T;
-  setValue: (newComment: T) => void;
+  storeData: (newValue: T) => void;
 }
 
 export default function useStoreData<K extends string, T>(
   key: K,
   initialValue?: T
-): StoreCommentsProps<T> {
+): StoreDataProps<T> {
   const [data, setData] = useState(() => {
     try {
       const storedValue = localStorage.getItem(key);
@@ -18,13 +18,13 @@ export default function useStoreData<K extends string, T>(
     }
   });
 
-  const setValue = useCallback(
-    (newComment: T) => {
-      setData(newComment);
-      localStorage.setItem(key, JSON.stringify(newComment));
+  const storeData = useCallback(
+    (newValue: T) => {
+      setData(newValue);
+      localStorage.setItem(key, JSON.stringify(newValue));
     },
     [key]
   );
 
-  return { data, setValue };
+  return { data, storeData };
 }
